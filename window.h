@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include <SDL2/SDL.h>
+#include "matrix.h" 
 
 typedef struct 
 {
@@ -10,6 +11,7 @@ typedef struct
     SDL_Window* win;
     SDL_Surface* win_surface;
     SDL_Event event;
+    Matrix matrix;
 }Window;
 
 Window createWindow(int width,int height);

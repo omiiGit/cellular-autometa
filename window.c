@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "window.h"
+#include "matrix.h"
 
 Window createWindow(int width,int height)
 {
@@ -36,6 +37,10 @@ void initWindow(Window* obj)
 
 void updateWindow(Window* obj)
 {
+    drawMatrix(&obj->matrix,obj->win_surface);
+
+    SDL_UpdateWindowSurface(obj->win);
+
     bool quit = false;
 
     while(!quit)

@@ -15,3 +15,4 @@ Matrix createMatrix(int cell_width,int cell_height,int columns,int rows);
 void drawMatrix(Matrix* obj,SDL_Surface* surface);
 
 #endif 
+

@@ -13,7 +13,7 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(CLIBS)
 
 %.o: %.c 
-	$(CC) $(CLFAGS) $< -c $@
+	$(CC) $(CFLAGS) $< -c $@
 
 run:
 	./$(TARGET)
