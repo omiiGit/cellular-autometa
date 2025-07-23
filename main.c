@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include "window.h"
 
-#define SCREEN_HEIGHT 600
-#define SCREEN_WIDTH 400
+#define SCREEN_HEIGHT 400
+#define SCREEN_WIDTH 600
 
 #define CELL_WIDTH 20
 #define CELL_HEIGHT 20
@@ -11,6 +12,12 @@
 
 int main()
 {
+    Window window = createWindow(SCREEN_WIDTH,SCREEN_HEIGHT);
+
+    initWindow(&window);
+    updateWindow(&window);
+    closeWindow(&window);
+    
     return 0;
 }
 
