@@ -24,6 +24,9 @@ clean:
 debug:
 	gdb --tui ./$(TARGET)
 
+make push:
+	./push.sh
+
 
 
 
