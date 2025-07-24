@@ -13,7 +13,7 @@ build: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(CLIBS)
 
-%.o: %.c 
+%.o: %.c macro.h 
 	$(CC) $(CFLAGS) $< -c $@
 
 run:

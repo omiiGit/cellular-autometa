@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include "macro.h"
+#include "matrix.h"
 #include "string.h"
 #include "window.h"
 
@@ -47,8 +48,11 @@ void initWindow(Window* obj)
 
     obj->win_surface = SDL_GetWindowSurface(obj->win);
 
+    initMatrix(&obj->matrix);
+
     SDL_FillRect(obj->win_surface,NULL,BLACK);
     drawGrid(obj->win_surface);
+    drawCell(&obj->matrix,obj->win_surface);
 
     SDL_UpdateWindowSurface(obj->win);
 }

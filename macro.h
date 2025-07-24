@@ -1,12 +1,13 @@
 #define WHITE 0xffffff
 #define BLACK 0x000000
 #define GREY 0x2f2f2f
+#define RED 0xff00000
 
 #define SCREEN_WIDTH 600
 #define SCREEN_HEIGHT 400
 
-#define CELL_WIDTH 10
-#define CELL_HEIGHT 10
+#define CELL_WIDTH 50
+#define CELL_HEIGHT 50
 
 #define COLUMNS SCREEN_WIDTH/CELL_WIDTH
 #define ROWS SCREEN_HEIGHT/CELL_HEIGHT
