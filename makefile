@@ -3,6 +3,7 @@ CFLAGS = -g -Iinclude -Wall `sdl2-config --cflags`
 CLIBS = `sdl2-config --libs`
 
 TARGET = autometa
+PUSH = ./push.sh
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
@@ -25,7 +26,7 @@ debug:
 	gdb --tui ./$(TARGET)
 
 make push:
-	./push.sh
+	$(PUSH)
 
 
 
