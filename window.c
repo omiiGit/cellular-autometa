@@ -19,6 +19,21 @@ Window createWindow(const char* title,int width,int height)
     };
 }
 
+void drawGrid(SDL_Surface* surface)
+{
+    for(int i = 0;i < ROWS;i++)
+    {
+        SDL_Rect line = {0,i * CELL_HEIGHT,SCREEN_WIDTH,1};
+        SDL_FillRect(surface,&line,GREY);
+    }
+
+    for(int i = 0;i < COLUMNS;i++)
+    {
+        SDL_Rect line = {i * CELL_WIDTH,0,1,SCREEN_HEIGHT};
+        SDL_FillRect(surface,&line,GREY);
+    }
+}
+
 void initWindow(Window* obj)
 {
     obj->win = SDL_CreateWindow(
@@ -33,6 +48,7 @@ void initWindow(Window* obj)
     obj->win_surface = SDL_GetWindowSurface(obj->win);
 
     SDL_FillRect(obj->win_surface,NULL,BLACK);
+    drawGrid(obj->win_surface);
 
     SDL_UpdateWindowSurface(obj->win);
 }
