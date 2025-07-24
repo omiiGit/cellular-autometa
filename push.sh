@@ -2,7 +2,7 @@
 
 KEY_PATH=~/.ssh/id_rsa
 
-if ssh-add $KEY_PATH 1>> /dev/null 2>> /dev/null
+if ! pgrep -u $USER "ssh-agent" 1> /dev/null 2> /dev/null
 then
     eval "$(ssh-agent -s)"
     ssh-add $KEY_PATH
