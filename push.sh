@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KEY_PATH=~/.ssh/id_rsa
+KEY_PATH=~/y
 DATE=$(date)
 
 if ! pgrep -u $USER "ssh-agent" 1> /dev/null 2> /dev/null
