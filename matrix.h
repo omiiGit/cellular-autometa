@@ -19,9 +19,9 @@ typedef struct
 
 Cell createCell(int x,int y,int v);
 
-void initMatrix(Matrix* matrix);
-void drawCell(Matrix* matrix,SDL_Surface* surface);
+void initMatrix(Matrix* matrix,int x,int y);
+void drawCell(Matrix* matrix,SDL_Surface* surface,int x,int y);
 void printMatrix(Matrix* matrix);
-     
+void updateCellPos(Matrix* obj,SDL_Surface* surface,int x,int y);
 
 #endif 

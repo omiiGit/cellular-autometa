@@ -13,9 +13,9 @@ Cell createCell(int x,int y,int v)
     };
 }
 
-void initMatrix(Matrix* matrix)
+void initMatrix(Matrix* matrix,int x,int y)
 {
-    matrix->s_cell = createCell(5,5,0); 
+    matrix->s_cell = createCell(x,y,0); 
 
     for(int i = 0;i < ROWS;i++)
     {
@@ -25,9 +25,9 @@ void initMatrix(Matrix* matrix)
         }
     }
 
-    int x = matrix->s_cell.x_pos;
-    int y = matrix->s_cell.y_pos;
-    matrix->matrix[x * COLUMNS + y] = 1;
+    int tx = matrix->s_cell.x_pos;
+    int ty = matrix->s_cell.y_pos;
+    matrix->matrix[tx * COLUMNS + ty] = 1;
 }
 
 void printMatrix(Matrix* matrix)
@@ -43,8 +43,12 @@ void printMatrix(Matrix* matrix)
     }
 }
 
-void drawCell(Matrix* matrix,SDL_Surface* surface)
+void drawCell(Matrix* matrix,SDL_Surface* surface,int x,int y)
 {
+
+    updateCellPos(matrix,surface,x,y);
+
+
     SDL_Rect cell = (SDL_Rect)
     {
         .x = (matrix->s_cell.x_pos) * CELL_WIDTH+1,
@@ -55,3 +59,24 @@ void drawCell(Matrix* matrix,SDL_Surface* surface)
 
     SDL_FillRect(surface,&cell,RED);
 }
+
+void updateCellPos(Matrix* obj,SDL_Surface* surface,int x,int y)
+{
+    obj->matrix[obj->s_cell.x_pos * COLUMNS + obj->s_cell.y_pos] = 0;
+
+    SDL_Rect cell = (SDL_Rect)
+    {
+        .x = (obj->s_cell.x_pos) * CELL_WIDTH+1,
+        .y = (obj->s_cell.y_pos) * CELL_HEIGHT+1,
+        .h = CELL_HEIGHT-1,
+        .w = CELL_WIDTH-1,
+    };
+
+    SDL_FillRect(surface,&cell,BLACK);
+
+    obj->s_cell.x_pos = x;
+    obj->s_cell.y_pos = y;
+
+    obj->matrix[obj->s_cell.x_pos * COLUMNS + obj->s_cell.y_pos] = 1;
+}
+

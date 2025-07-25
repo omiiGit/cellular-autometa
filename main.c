@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     initWindow(&win);
 
     print_stats();
-    printMatrix(&win.matrix);
+    //printMatrix(&win.matrix);
 
     updateWindowSurface(&win);
     closeWindow(&win);
