@@ -48,7 +48,6 @@ void drawCell(Matrix* matrix,SDL_Surface* surface,int x,int y)
 
     updateCellPos(matrix,surface,x,y);
 
-
     SDL_Rect cell = (SDL_Rect)
     {
         .x = (matrix->s_cell.x_pos) * CELL_WIDTH+1,
