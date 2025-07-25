@@ -25,13 +25,13 @@ void drawGrid(SDL_Surface* surface)
     for(int i = 0;i < ROWS;i++)
     {
         SDL_Rect line = {0,i * CELL_HEIGHT,SCREEN_WIDTH,1};
-        SDL_FillRect(surface,&line,WHITE);
+        SDL_FillRect(surface,&line,GREY);
     }
 
     for(int i = 0;i < COLUMNS;i++)
     {
         SDL_Rect line = {i * CELL_WIDTH,0,1,SCREEN_HEIGHT};
-        SDL_FillRect(surface,&line,WHITE);
+        SDL_FillRect(surface,&line,GREY);
     }
 }
 
@@ -48,7 +48,7 @@ void initWindow(Window* obj)
 
     obj->win_surface = SDL_GetWindowSurface(obj->win);
 
-    initMatrix(&obj->matrix,5,0);
+    initMatrix(&obj->matrix,50,10);
 
     SDL_FillRect(obj->win_surface,NULL,BLACK);
     drawGrid(obj->win_surface);
@@ -59,17 +59,27 @@ void initWindow(Window* obj)
 void updateWindowSurface(Window* obj)
 {
     bool quit = false;
+    bool flag;
     int x_pos = obj->matrix.s_cell.x_pos;
     int y_pos = obj->matrix.s_cell.y_pos;
 
     while(!quit)
     {
+        flag = false;
         while(SDL_PollEvent(&obj->event))
         {
             if(obj->event.type == SDL_QUIT)
             {
                 quit = true;
             }
+            else if(obj->event.type == SDL_KEYDOWN)
+            {
+                switch(obj->event.key.keysym.sym)
+                {
+
+                }
+            }
+            
         }
         drawCell(&obj->matrix,obj->win_surface,x_pos,y_pos);
         //x_pos++;
