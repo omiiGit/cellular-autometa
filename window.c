@@ -48,7 +48,7 @@ void initWindow(Window* obj)
 
     obj->win_surface = SDL_GetWindowSurface(obj->win);
 
-    initMatrix(&obj->matrix,50,10);
+    initMatrix(&obj->matrix,0,0);
 
     SDL_FillRect(obj->win_surface,NULL,BLACK);
     drawGrid(obj->win_surface);
@@ -79,11 +79,30 @@ void updateWindowSurface(Window* obj)
 
                 }
             }
+            else if(obj->event.type == SDL_MOUSEBUTTONDOWN)
+            {
+                x_pos = (obj->event.motion.x-1)/CELL_WIDTH;
+                y_pos = (obj->event.motion.y-1)/CELL_HEIGHT;
+                printf("Mouse is clicked at %d-%d\n",x_pos,y_pos);
+                drawCell(&obj->matrix,obj->win_surface,x_pos,y_pos);
+            }
             
         }
-        drawCell(&obj->matrix,obj->win_surface,x_pos,y_pos);
-        //x_pos++;
-        y_pos++;
+        SDL_UpdateWindowSurface(obj->win);
+        //printf("%d-%d\n",x_pos,y_pos);
+
+        if(y_pos <= ROWS-1)
+        {
+            drawCell(&obj->matrix,obj->win_surface,x_pos,y_pos);
+            //x_pos++;
+            if(y_pos == ROWS-1)
+            {
+                obj->matrix.matrix[y_pos * COLUMNS + x_pos] = 1;
+                printMatrix(&obj->matrix);
+            }
+
+            y_pos++;
+        }
 
         SDL_UpdateWindowSurface(obj->win);
         SDL_Delay(100);

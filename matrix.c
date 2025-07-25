@@ -16,6 +16,7 @@ Cell createCell(int x,int y,int v)
 void initMatrix(Matrix* matrix,int x,int y)
 {
     matrix->s_cell = createCell(x,y,0); 
+    matrix->matrix = (int*)malloc(sizeof(int) * (ROWS*COLUMNS));
 
     for(int i = 0;i < ROWS;i++)
     {
@@ -25,9 +26,6 @@ void initMatrix(Matrix* matrix,int x,int y)
         }
     }
 
-    int tx = matrix->s_cell.x_pos;
-    int ty = matrix->s_cell.y_pos;
-    matrix->matrix[tx * COLUMNS + ty] = 1;
 }
 
 void printMatrix(Matrix* matrix)

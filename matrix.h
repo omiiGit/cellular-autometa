@@ -14,7 +14,8 @@ typedef struct
 typedef struct 
 {
     Cell s_cell;
-    int matrix[ROWS * COLUMNS];
+    //int matrix[ROWS * COLUMNS];
+    int* matrix;
 }Matrix;
 
 Cell createCell(int x,int y,int v);
