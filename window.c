@@ -50,7 +50,7 @@ void initWindow(Window* obj)
 
     initMatrix(&obj->matrix,0,0);
 
-    SDL_FillRect(obj->win_surface,NULL,BLACK);
+    SDL_FillRect(obj->win_surface,NULL,WHITE);
     drawGrid(obj->win_surface);
 
     SDL_UpdateWindowSurface(obj->win);
@@ -59,13 +59,11 @@ void initWindow(Window* obj)
 void updateWindowSurface(Window* obj)
 {
     bool quit = false;
-    bool flag;
     int x_pos = obj->matrix.s_cell.x_pos;
     int y_pos = obj->matrix.s_cell.y_pos;
 
     while(!quit)
     {
-        flag = false;
         while(SDL_PollEvent(&obj->event))
         {
             if(obj->event.type == SDL_QUIT)
@@ -88,24 +86,20 @@ void updateWindowSurface(Window* obj)
             }
             
         }
-        SDL_UpdateWindowSurface(obj->win);
         //printf("%d-%d\n",x_pos,y_pos);
-
-        if(y_pos <= ROWS-1)
+        
+        if(y_pos <= (ROWS - 1))
         {
-            drawCell(&obj->matrix,obj->win_surface,x_pos,y_pos);
-            //x_pos++;
-            if(y_pos == ROWS-1)
+            updateCellPos(&obj->matrix,obj->win_surface,x_pos,y_pos);
+            if(y_pos == ROWS - 1)
             {
                 obj->matrix.matrix[y_pos * COLUMNS + x_pos] = 1;
-                printMatrix(&obj->matrix);
+                //printMatrix(&obj->matrix);
             }
-
             y_pos++;
         }
-
         SDL_UpdateWindowSurface(obj->win);
-        SDL_Delay(100);
+        SDL_Delay(10);
     }
 }
 
