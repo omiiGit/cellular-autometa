@@ -3,7 +3,8 @@ CFLAGS = -g -Iinclude -Wall `sdl2-config --cflags`
 CLIBS = `sdl2-config --libs`
 
 TARGET = autometa
-PUSH = ./push.sh
+PUSH = ./git.sh push
+PULL = ./git.sh pull
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
@@ -27,6 +28,9 @@ debug:
 
 make push:
 	$(PUSH)
+
+make pull:
+	$(PULL)
 
 
 
