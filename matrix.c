@@ -3,15 +3,6 @@
 #include "matrix.h"
 #include "macro.h" 
 
-Cell createCell(int x,int y,int v)
-{
-    return(Cell)
-    {
-        .x_pos = x,
-        .y_pos = y,
-        .velocity = v,
-    };
-}
 
 void initMatrix(Matrix* matrix,int x,int y)
 {
@@ -39,42 +30,5 @@ void printMatrix(Matrix* matrix)
         }
         printf("\n");
     }
-}
-
-void drawCell(Matrix* matrix,SDL_Surface* surface,int x,int y)
-{
-    matrix->s_cell.x_pos = x;
-    matrix->s_cell.y_pos = y;
-
-    SDL_Rect cell = (SDL_Rect)
-    {
-        .x = (matrix->s_cell.x_pos) * CELL_WIDTH+1,
-        .y = matrix->s_cell.y_pos * CELL_HEIGHT+1,
-        .h = CELL_HEIGHT-1,
-        .w = CELL_WIDTH-1,
-    };
-
-    SDL_FillRect(surface,&cell,RED);
-}
-
-void updateCellPos(Matrix* obj,SDL_Surface* surface,int x,int y)
-{
-    SDL_Rect cell = (SDL_Rect)
-    {
-        .x = (obj->s_cell.x_pos) * CELL_WIDTH+1,
-        .y = (obj->s_cell.y_pos) * CELL_HEIGHT+1,
-        .h = CELL_HEIGHT-1,
-        .w = CELL_WIDTH-1,
-    };
-
-    SDL_FillRect(surface,&cell,WHITE);
-
-    obj->s_cell.x_pos = x;
-    obj->s_cell.y_pos = y;
-
-    cell.x = (obj->s_cell.x_pos) * CELL_WIDTH+1,
-    cell.y = (obj->s_cell.y_pos) * CELL_HEIGHT+1,
-    
-    SDL_FillRect(surface,&cell,RED);
 }
 

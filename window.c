@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "macro.h"
 #include "matrix.h"
+#include "cell.h"
 #include "string.h"
 #include "window.h"
 
@@ -82,7 +83,7 @@ void updateWindowSurface(Window* obj)
                 x_pos = (obj->event.motion.x-1)/CELL_WIDTH;
                 y_pos = (obj->event.motion.y-1)/CELL_HEIGHT;
                 printf("Mouse is clicked at %d-%d\n",x_pos,y_pos);
-                drawCell(&obj->matrix,obj->win_surface,x_pos,y_pos);
+                drawCell(&obj->matrix.s_cell,obj->win_surface,x_pos,y_pos);
             }
             
         }
@@ -90,7 +91,7 @@ void updateWindowSurface(Window* obj)
         
         if(y_pos <= (ROWS - 1))
         {
-            updateCellPos(&obj->matrix,obj->win_surface,x_pos,y_pos);
+            updateCellPos(&obj->matrix.s_cell,obj->win_surface,x_pos,y_pos);
             if(y_pos == ROWS - 1)
             {
                 obj->matrix.matrix[y_pos * COLUMNS + x_pos] = 1;
