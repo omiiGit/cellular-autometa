@@ -9,7 +9,7 @@ then
     eval "$(ssh-agent -s)" 1> git.log 2> git_err.log
     ssh-add "$KEY_PATH" 1> git.log 2> git_err.log
 else
-    touch git.log git.log
+    touch git.log git_err.log
 fi
 
 
