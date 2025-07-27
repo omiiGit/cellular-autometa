@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KEY_PATH=~/.ssh/id_rsa
+KEY_PATH=~/y
 date=$(date)
 
 if ! [ -n "$SSH_AGENT_PID" ]
