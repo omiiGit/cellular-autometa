@@ -24,10 +24,15 @@ int main(int argc, char* argv[])
 
     //int n = 9;
 
-    ADD_LIST(int,&list,10);
+    ADD_LIST(int,&list,178);
+    ADD_LIST(int,&list,12);
+    ADD_LIST(int,&list,17);
+    ADD_LIST(int,&list,19);
 
+    PRINT_LIST(int,&list);
 
-    printf("%d\n",list.head->data);
+    //printf("%d\n",list.first->data);
+    //printf("%d\n",list.head->data);
 }
 
 void print_stats()

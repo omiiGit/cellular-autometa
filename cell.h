@@ -4,6 +4,11 @@
 #include <SDL2/SDL.h>
 #include "macro.h"
 
+#define PRINT_int(a) (printf("%d ",a))
+#define PRINT_float(a) (printf("%g ",a))
+#define PRINT_double(a) (printf("%g ",a))
+
+
 #define NODE(type)\
     typedef struct Node_##type\
     {\
@@ -38,39 +43,16 @@ LIST(int);
 #define CREATE_LIST(type)\
     (List_##type)\
     {\
-        .first = CREATE_NODE(type),\
+        .first = NULL,\
         .head = CREATE_NODE(type),\
         .count = 0,\
     }\
 
 
-//#define Node Node_##type
-
-/*#define ADD_LIST(type,list,value)\
-  do{\
-        Node_##type* t = (Node_##type*)malloc(sizeof(Node_##type));\
-        t->next = NULL;\
-        t->prev = NULL;\
-        t->data = (value);\
-        if((list)->count == 0)\
-        {\
-            (list)->head = t;\
-            (list)->frist = t;\
-        }\
-        else\
-        {\
-            (list)->head->next = t;\
-            t->prev = (list)->head;\
-            (list)->head = t;\
-        }\
-        (list)->count++;\
-    }while(0)\*/
 
 #define ADD_LIST(type, list, value)                              \
     do {                                                         \
-        Node_##type* t = (Node_##type*)malloc(sizeof(Node_##type)); \
-        t->next = NULL;                                          \
-        t->prev = NULL;                                          \
+        Node_##type* t = CREATE_NODE(type); \
         t->data = (value);                                       \
                                                                  \
         if ((list)->count == 0) {                                \
@@ -83,6 +65,17 @@ LIST(int);
         }                                                        \
         (list)->count++;                                         \
     } while (0)
+
+#define PRINT_LIST(type,list)\
+    do{\
+        Node_##type* t = (list)->first;\
+        while(t != NULL)\
+        {\
+            PRINT_##type(t->data);\
+            t = t->next;\
+        }\
+        printf("\n");\
+    } while (0)\
 
 typedef struct 
 {
