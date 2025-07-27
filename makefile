@@ -4,7 +4,7 @@ CLIBS = `sdl2-config --libs`
 
 TARGET = autometa
 PUSH = ./git.sh push
-PULL = ./git.sh pull
+#PULL = ./git.sh pull
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
@@ -29,8 +29,8 @@ debug:
 make push:
 	$(PUSH)
 
-make pull:
-	$(PULL)
+#make pull:
+	#$(PULL)
 
 
 

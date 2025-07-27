@@ -2,12 +2,13 @@
 #include "macro.h"
 #include "window.h"
 #include "matrix.h"
+#include "cell.h"
 
 void print_stats();
 
 int main(int argc, char* argv[])
 {
-    const char* title = "CELLULAR AUTOMETA";
+    /*const char* title = "CELLULAR AUTOMETA";
     Window win = createWindow(title,SCREEN_WIDTH,SCREEN_HEIGHT);
     initWindow(&win);
 
@@ -17,7 +18,13 @@ int main(int argc, char* argv[])
     updateWindowSurface(&win);
     closeWindow(&win);
 
-    return 0;
+    return 0;*/
+
+    List_int list = CREATE_LIST(int);
+
+    list.count = 10;
+
+    printf("%d\n",list.count);
 }
 
 void print_stats()

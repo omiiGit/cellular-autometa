@@ -100,7 +100,7 @@ void updateWindowSurface(Window* obj)
             y_pos++;
         }
         SDL_UpdateWindowSurface(obj->win);
-        SDL_Delay(10);
+        SDL_Delay(5);
     }
 }
 
