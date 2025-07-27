@@ -22,9 +22,12 @@ int main(int argc, char* argv[])
 
     List_int list = CREATE_LIST(int);
 
-    list.count = 10;
+    //int n = 9;
 
-    printf("%d\n",list.count);
+    ADD_LIST(int,&list,10);
+
+
+    printf("%d\n",list.head->data);
 }
 
 void print_stats()
