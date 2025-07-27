@@ -30,9 +30,9 @@ int main(int argc, char* argv[])
     ADD_LIST(int,&list,19);
 
     PRINT_LIST(int,&list);
+    DELL_LIST(int,&list,1);
+    PRINT_LIST(int,&list);
 
-    //printf("%d\n",list.first->data);
-    //printf("%d\n",list.head->data);
 }
 
 void print_stats()

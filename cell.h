@@ -66,6 +66,21 @@ LIST(int);
         (list)->count++;                                         \
     } while (0)
 
+#define DELL_LIST(type,list,pos)\
+    do{\
+        Node_##type* t = (list)->first;\
+\
+        for(int i = 0;i < (pos);i++)\
+        {\
+           t = t->next;\
+        }\
+\
+        Node_##type* del = t->next;\
+\
+        t->next = del->next;\
+        del->next->prev = t;\
+    }while(0)\
+
 #define PRINT_LIST(type,list)\
     do{\
         Node_##type* t = (list)->first;\
