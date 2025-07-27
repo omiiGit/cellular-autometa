@@ -19,20 +19,28 @@ int main(int argc, char* argv[])
     closeWindow(&win);
 
     return 0;*/
+    
+    List_Cell cells;
+    int x,y;
 
-    List_int list = CREATE_LIST(int);
+    for(int i = 0,x = 0,y = 0;i < 7;i++,y++)
+    {
+        Cell* cell = (Cell*)malloc(sizeof(Cell));
 
-    //int n = 9;
+        cell->x_pos = x;
+        cell->y_pos = y;
+        cell->state = DOWN;
+        cell->velocity = 0;
 
-    ADD_LIST(int,&list,178);
-    ADD_LIST(int,&list,12);
-    ADD_LIST(int,&list,17);
-    ADD_LIST(int,&list,19);
+        ADD_LIST(Cell,&cells,*cell);
+    }
 
-    PRINT_LIST(int,&list);
-    DELL_LIST(int,&list,2);
-    PRINT_LIST(int,&list);
+    for(int i = 0;i < cells.count;i++)
+    {
+        Cell* cell = GET_ITEM(Cell,&cells,i);
 
+        printf("CELL %d= %d,%d\n",i,cell->x_pos,cell->y_pos);
+    }
 }
 
 void print_stats()

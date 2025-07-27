@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "matrix.h"
+#include "cell.h"
 #include "macro.h" 
 
 
 void initMatrix(Matrix* matrix,int x,int y)
 {
-    matrix->s_cell = createCell(x,y,0); 
+    matrix->cells = CREATE_LIST(Cell); 
     //matrix->matrix = (int*)malloc(sizeof(int) * (ROWS*COLUMNS));
 
     for(int i = 0;i < ROWS;i++)

@@ -68,19 +68,42 @@ LIST(int);
 
 #define DELL_LIST(type,list,pos)\
     do{\
-        Node_##type* t = (list)->first;\
-\
-        for(int i = 0;i < (pos - 1);i++)\
+        if((pos) == 0)\
         {\
-           t = t->next;\
+            Node_##type* del = (list)->first;\
+            \
+            (list)->first = (list)->first->next;\
+            free(del);\
         }\
+        else\
+        {\
+            Node_##type* t = (list)->first;\
 \
-        Node_##type* del = t->next;\
+            for(int i = 0;i < (pos - 1);i++)\
+            {\
+                t = t->next;\
+            }\
 \
-        t->next = del->next;\
-        del->next->prev = t;\
-        free(del);\
+            Node_##type* del = t->next;\
+\
+            t->next = del->next;\
+            del->next->prev = t;\
+            free(del);\
+        }\
+        (list)->count--;\
     }while(0)\
+
+#define GET_ITEM(type,list,pos)\
+({\
+        Node_##type* t = (list)->first;\
+        \
+        for(int i = 0;i < pos;i++)\
+        {\
+            t = t->next;\
+        }\
+        &(t->data);\
+\
+})\
 
 #define PRINT_LIST(type,list)\
     do{\
@@ -93,19 +116,28 @@ LIST(int);
         printf("\n");\
     } while (0)\
 
+typedef enum
+{
+    REST,
+    DOWN,
+    COLLIDE,
+    DEAD,
+}State;
+
 typedef struct 
 {
     int x_pos;
     int y_pos;
     int velocity;
+    State state;
 }Cell;
 
 NODE(Cell);
 LIST(Cell);
 
 Cell createCell(int x,int y,int v);
-void drawCell(Cell* s_cell,SDL_Surface* surface,int x,int y);
-void updateCellPos(Cell* obj,SDL_Surface* surface,int x,int y);
+void drawCells(List_Cell* cells,SDL_Surface* surface,int x,int y);
+void updateCellsPos(List_Cell* cells,SDL_Surface* surface);
 
 
 #endif 

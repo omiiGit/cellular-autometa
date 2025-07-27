@@ -7,7 +7,7 @@
 
 typedef struct 
 {
-    Cell s_cell;
+    List_Cell cells;
     int matrix[ROWS * COLUMNS];
     //int* matrix;
 }Matrix;

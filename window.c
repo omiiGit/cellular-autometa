@@ -60,8 +60,9 @@ void initWindow(Window* obj)
 void updateWindowSurface(Window* obj)
 {
     bool quit = false;
-    int x_pos = obj->matrix.s_cell.x_pos;
-    int y_pos = obj->matrix.s_cell.y_pos;
+    
+    int x_pos = 0;
+    int y_pos = 0;
 
     while(!quit)
     {
@@ -82,14 +83,23 @@ void updateWindowSurface(Window* obj)
             {
                 x_pos = (obj->event.motion.x-1)/CELL_WIDTH;
                 y_pos = (obj->event.motion.y-1)/CELL_HEIGHT;
-                printf("Mouse is clicked at %d-%d\n",x_pos,y_pos);
-                drawCell(&obj->matrix.s_cell,obj->win_surface,x_pos,y_pos);
+                drawCells(&obj->matrix.cells,obj->win_surface,x_pos,y_pos);
+                printf("%d\n",obj->matrix.cells.count);
+
+                for(int i = 0;i < obj->matrix.cells.count;i++)
+                {
+                    Cell* cell = GET_ITEM(Cell,&obj->matrix.cells,i);
+
+                    printf("CELL %d - %d,%d\n",i,cell->x_pos,cell->y_pos);
+                    printf("Mouse is clicked at %d-%d\n",x_pos,y_pos);
+                }
+                SDL_UpdateWindowSurface(obj->win);
             }
             
         }
         //printf("%d-%d\n",x_pos,y_pos);
         
-        if(y_pos <= (ROWS - 1))
+        /*if(y_pos <= (ROWS - 1))
         {
             updateCellPos(&obj->matrix.s_cell,obj->win_surface,x_pos,y_pos);
             if(y_pos == ROWS - 1)
@@ -98,9 +108,10 @@ void updateWindowSurface(Window* obj)
                 //printMatrix(&obj->matrix);
             }
             y_pos++;
-        }
+        }*/
+        //updateCellsPos(&obj->matrix.cells,obj->win_surface);
         SDL_UpdateWindowSurface(obj->win);
-        SDL_Delay(5);
+        //SDL_Delay(50);
     }
 }
 

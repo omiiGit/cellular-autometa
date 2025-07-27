@@ -10,43 +10,74 @@ Cell createCell(int x,int y,int v)
         .x_pos = x,
         .y_pos = y,
         .velocity = v,
+        .state = DOWN,
     };
 }
 
-void drawCell(Cell* s_cell,SDL_Surface* surface,int x,int y)
+void drawCells(List_Cell* cells,SDL_Surface* surface,int x,int y)
 {
-    s_cell->x_pos = x;
-    s_cell->y_pos = y;
+    Cell cell = createCell(x,y,1); 
+    //Cell* cell = (Cell*)malloc(sizeof(Cell));
 
-    SDL_Rect cell = (SDL_Rect)
+    //*cell = createCell(x,y,1);
+
+    SDL_Rect cell_rect = (SDL_Rect)
     {
-        .x = (s_cell->x_pos) * CELL_WIDTH+1,
-        .y = s_cell->y_pos * CELL_HEIGHT+1,
+        .x = cell.x_pos * CELL_WIDTH+1,
+        .y = cell.y_pos * CELL_HEIGHT+1,
         .h = CELL_HEIGHT-1,
         .w = CELL_WIDTH-1,
     };
 
-    SDL_FillRect(surface,&cell,RED);
+    ADD_LIST(Cell,cells,cell);
+    SDL_FillRect(surface,&cell_rect,RED);
 }
 
-void updateCellPos(Cell* s_cell,SDL_Surface* surface,int x,int y)
+void updateCellsPos(List_Cell* cells,SDL_Surface* surface)
 {
-    SDL_Rect cell = (SDL_Rect)
+    int k = 0;
+
+
+    for(int i = 0;i < cells->count;i++)
     {
-        .x = (s_cell->x_pos) * CELL_WIDTH+1,
-        .y = (s_cell->y_pos) * CELL_HEIGHT+1,
-        .h = CELL_HEIGHT-1,
-        .w = CELL_WIDTH-1,
-    };
+        Cell* cell = GET_ITEM(Cell,cells,i);
 
-    SDL_FillRect(surface,&cell,WHITE);
+        if(cell->y_pos == ROWS - 1)
+        {
+            cell->state = COLLIDE;
+            continue;
+        }
 
-    s_cell->x_pos = x;
-    s_cell->y_pos = y;
+        SDL_Rect cell_rect = (SDL_Rect)
+        {
+            .x = (cell->x_pos) * CELL_WIDTH+1,
+            .y = (cell->y_pos) * CELL_HEIGHT+1,
+            .h = CELL_HEIGHT-1,
+            .w = CELL_WIDTH-1,
+        };
 
-    cell.x = (s_cell->x_pos) * CELL_WIDTH+1,
-    cell.y = (s_cell->y_pos) * CELL_HEIGHT+1,
+        SDL_FillRect(surface,&cell_rect,WHITE);
+
+        switch(cell->state)
+        {
+            case REST:
+                cell->state = DOWN;
+            break;
+            case DOWN:
+                cell->y_pos += cell->velocity;
+            break;
+            case COLLIDE:
+                cell->state = DEAD;
+            break;
+            case DEAD:
+                DELL_LIST(Cell,cells,i);
+            break;
+        }
+
+        cell_rect.x = (cell->x_pos) * CELL_WIDTH+1,
+        cell_rect.y = (cell->y_pos) * CELL_HEIGHT+1,
     
-    SDL_FillRect(surface,&cell,RED);
+        SDL_FillRect(surface,&cell_rect,RED);
+    }
 }
 
