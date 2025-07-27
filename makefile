@@ -14,7 +14,7 @@ build: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(CLIBS)
 
-%.o: %.c macro.h 
+%.o: %.c macro.h cell.h 
 	$(CC) $(CFLAGS) $< -c $@
 
 run:

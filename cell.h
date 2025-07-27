@@ -70,7 +70,7 @@ LIST(int);
     do{\
         Node_##type* t = (list)->first;\
 \
-        for(int i = 0;i < (pos);i++)\
+        for(int i = 0;i < (pos - 1);i++)\
         {\
            t = t->next;\
         }\
@@ -79,6 +79,7 @@ LIST(int);
 \
         t->next = del->next;\
         del->next->prev = t;\
+        free(del);\
     }while(0)\
 
 #define PRINT_LIST(type,list)\

@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     ADD_LIST(int,&list,19);
 
     PRINT_LIST(int,&list);
-    DELL_LIST(int,&list,1);
+    DELL_LIST(int,&list,2);
     PRINT_LIST(int,&list);
 
 }
