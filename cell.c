@@ -42,10 +42,9 @@ void updateCellsPos(List_Cell* cells,SDL_Surface* surface)
     {
         Cell* cell = GET_ITEM(Cell,cells,i);
 
-        if(cell->y_pos == ROWS - 1)
+        if(cell->y_pos == ROWS - 1 && cell->state != DEAD)
         {
             cell->state = COLLIDE;
-            continue;
         }
 
         SDL_Rect cell_rect = (SDL_Rect)
@@ -70,7 +69,8 @@ void updateCellsPos(List_Cell* cells,SDL_Surface* surface)
                 cell->state = DEAD;
             break;
             case DEAD:
-                DELL_LIST(Cell,cells,i);
+                //DELL_LIST(Cell,cells,i);
+                printf("-------");
             break;
         }
 

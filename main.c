@@ -16,10 +16,8 @@ int main(int argc, char* argv[])
     //printMatrix(&win.matrix);
 
     updateWindowSurface(&win);
-    closeWindow(&win);
+    closeWindow(&win);*/
 
-    return 0;*/
-    
     List_Cell cells;
     int x,y;
 
@@ -35,12 +33,18 @@ int main(int argc, char* argv[])
         ADD_LIST(Cell,&cells,*cell);
     }
 
+    int pos = 2;
+    //DELL_LIST(Cell,&cells,3);
+
     for(int i = 0;i < cells.count;i++)
     {
         Cell* cell = GET_ITEM(Cell,&cells,i);
 
         printf("CELL %d= %d,%d\n",i,cell->x_pos,cell->y_pos);
     }
+
+
+    return 0;
 }
 
 void print_stats()

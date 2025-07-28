@@ -66,42 +66,15 @@ LIST(int);
         (list)->count++;                                         \
     } while (0)
 
-#define DELL_LIST(type,list,pos)\
-    do{\
-        if((pos) == 0)\
-        {\
-            Node_##type* del = (list)->first;\
-            \
-            (list)->first = (list)->first->next;\
-            free(del);\
-        }\
-        else\
-        {\
-            Node_##type* t = (list)->first;\
-\
-            for(int i = 0;i < (pos - 1);i++)\
-            {\
-                t = t->next;\
-            }\
-\
-            Node_##type* del = t->next;\
-\
-            t->next = del->next;\
-            del->next->prev = t;\
-            free(del);\
-        }\
-        (list)->count--;\
-    }while(0)\
-
 #define GET_ITEM(type,list,pos)\
 ({\
-        Node_##type* t = (list)->first;\
+        Node_##type* __t = (list)->first;\
         \
-        for(int i = 0;i < pos;i++)\
+        for(int __i = 0;__i < (pos);__i++)\
         {\
-            t = t->next;\
+            __t = __t->next;\
         }\
-        &(t->data);\
+       &__t->data;\
 \
 })\
 
