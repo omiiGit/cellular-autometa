@@ -1,36 +1,32 @@
 CC = gcc
-CFLAGS = -g3 -Iinclude -Wall `sdl2-config --cflags`
+CFLAGS = -g -Wall -Iinclude `sdl2-config --cflags`
 CLIBS = `sdl2-config --libs`
 
-TARGET = autometa
-PUSH = ./git.sh push
-#PULL = ./git.sh pull
+SRC = $(wildcard src/*.c)
+HEAD = $(wildcard include/*.h)
+OBJ = $(SRC:src/%.c=build/%.o)
+TARGET = AUTOMATA
 
-SRC = $(wildcard *.c)
-OBJ = $(SRC:.c=.o)
-
-build: $(TARGET) 
+build: $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(CLIBS)
 
-%.o: %.c macro.h cell.h 
-	$(CC) $(CFLAGS) $< -c $@
+build/%.o: src/%.c $(HEAD)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 run:
 	./$(TARGET)
 
 clean:
-	rm -fr $(TARGET) *.o
+	rm -fr build/* $(TARGET)
 
 debug:
 	gdb --tui ./$(TARGET)
 
-make push:
-	$(PUSH)
 
-#make pull:
-	#$(PULL)
+
+
 
 
 
