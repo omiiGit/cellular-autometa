@@ -14,7 +14,7 @@ Cell createCell(int x,int y,int v)
     };
 }
 
-void drawCells(List_Cell* cells,SDL_Surface* surface,int x,int y)
+/*void drawCells(List_Cell* cells,SDL_Surface* surface,int x,int y)
 {
     Cell cell = createCell(x,y,1); 
     //Cell* cell = (Cell*)malloc(sizeof(Cell));
@@ -29,7 +29,7 @@ void drawCells(List_Cell* cells,SDL_Surface* surface,int x,int y)
         .w = CELL_WIDTH-1,
     };
 
-    ADD_LIST(Cell,cells,cell);
+    //ADD_LIST(Cell,cells,cell);
     SDL_FillRect(surface,&cell_rect,RED);
 }
 
@@ -79,5 +79,5 @@ void updateCellsPos(List_Cell* cells,SDL_Surface* surface)
     
         SDL_FillRect(surface,&cell_rect,RED);
     }
-}
+}*/
 

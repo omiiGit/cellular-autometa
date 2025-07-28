@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     updateWindowSurface(&win);
     closeWindow(&win);*/
 
-    List_Cell cells;
+    /*List_Cell cells;
     int x,y;
 
     for(int i = 0,x = 0,y = 0;i < 7;i++,y++)
@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
         Cell* cell = GET_ITEM(Cell,&cells,i);
 
         printf("CELL %d= %d,%d\n",i,cell->x_pos,cell->y_pos);
-    }
+    }*/ 
 
 
     return 0;

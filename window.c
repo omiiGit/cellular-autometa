@@ -57,7 +57,7 @@ void initWindow(Window* obj)
     SDL_UpdateWindowSurface(obj->win);
 }
 
-void updateWindowSurface(Window* obj)
+/*void updateWindowSurface(Window* obj)
 {
     bool quit = false;
     
@@ -98,7 +98,7 @@ void updateWindowSurface(Window* obj)
         }
         //printf("%d-%d\n",x_pos,y_pos);
         
-        /*if(y_pos <= (ROWS - 1))
+        if(y_pos <= (ROWS - 1))
         {
             updateCellPos(&obj->matrix.s_cell,obj->win_surface,x_pos,y_pos);
             if(y_pos == ROWS - 1)
@@ -107,12 +107,12 @@ void updateWindowSurface(Window* obj)
                 //printMatrix(&obj->matrix);
             }
             y_pos++;
-        }*/
+        }
         updateCellsPos(&obj->matrix.cells,obj->win_surface);
         SDL_UpdateWindowSurface(obj->win);
         SDL_Delay(50);
     }
-}
+}*/
 
 void closeWindow(Window* obj)
 {

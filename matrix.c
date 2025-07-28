@@ -7,7 +7,6 @@
 
 void initMatrix(Matrix* matrix,int x,int y)
 {
-    matrix->cells = CREATE_LIST(Cell); 
     //matrix->matrix = (int*)malloc(sizeof(int) * (ROWS*COLUMNS));
 
     for(int i = 0;i < ROWS;i++)
