@@ -37,3 +37,6 @@
  4 files changed, 5 insertions(+)
  create mode 100644 list.c
  create mode 100644 list.h
+[master 319fb97] updated on Tue Jul 29 01:43:00 PM IST 2025
+ 14 files changed, 270 insertions(+), 11 deletions(-)
+ create mode 100644 include/list.h

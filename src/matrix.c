@@ -12,6 +12,21 @@ Vec2 createVec2(int x,int y)
     };
 }
 
+bool isVec2inList(Vec2* a,List* vec_list)
+{
+    for(int i = 0;i < vec_list->count;i++)
+    {
+        Vec2 vec = LIST_GET(Vec2,vec_list,i);
+
+        if(a->x == vec.x && a->y == vec.y)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 Matrix createMatrix(void)
 {
     return(Matrix)

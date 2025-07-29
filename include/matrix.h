@@ -20,7 +20,7 @@ typedef struct
 
 Vec2 createVec2(int x,int y);
 bool compVec2(Vec2 a,Vec2 b);
-bool isVec2inList(Vec2 a,List vec_list);
+bool isVec2inList(Vec2* a,List* vec_list);
 
 Matrix createMatrix(void);
 void initMatrix(Matrix* matrix);
