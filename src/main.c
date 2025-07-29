@@ -29,6 +29,7 @@ int main()
     setCell(&matrix,x,y);
     setCell(&matrix,0,4);
     setCell(&matrix,0,6);
+    setCell(&matrix,2,4);
 
     printMatrix(&matrix);
     updateCells(&matrix);

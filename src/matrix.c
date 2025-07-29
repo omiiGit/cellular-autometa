@@ -100,9 +100,9 @@ void updateCells(Matrix* obj)
 {
     List vectors = createList();
 
-    for(int i = 0;i < COLUMNS;i++)
+    for(int i = 0;i < ROWS;i++)
     {
-        for(int j = 0;j < ROWS;j++)
+        for(int j = 0;j < COLUMNS;j++)
         {
             Vec2 temp = {i,j};
             int pos = COLUMNS * i + j;
