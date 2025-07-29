@@ -109,7 +109,6 @@ void updateCells(Matrix* obj)
 
             if(obj->arr[pos] == 1 && !isVec2inList(&temp,&vectors))
             {
-                obj->arr[pos] = 1;
                 obj->arr[pos] = 0;
                 obj->arr[COLUMNS * (i+1) + j] = 1;
 
