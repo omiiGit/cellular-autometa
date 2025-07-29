@@ -115,6 +115,7 @@ void updateCells(Matrix* obj)
                 Vec2 vec = (Vec2){.x = i+1,.y=j};
                 LIST_ADD(Vec2,&vectors,vec);
             }
+                
         }
     }
 }
