@@ -104,7 +104,7 @@ void updateCells(Matrix* obj)
     {
         for(int j = 0;j < ROWS;j++)
         {
-            Vec2 temp = {j,i};
+            Vec2 temp = {i,j};
             int pos = COLUMNS * i + j;
 
             if(obj->arr[pos] == 1 && !isVec2inList(&temp,&vectors))
