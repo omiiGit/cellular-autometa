@@ -5,6 +5,9 @@ CLIBS = `sdl2-config --libs`
 SRC = $(wildcard src/*.c)
 HEAD = $(wildcard include/*.h)
 OBJ = $(SRC:src/%.c=build/%.o)
+DEPS = $(OBJ:.o=.d)
+HEADS = $(HEAD:.h=.d)
+
 TARGET = AUTOMATA
 
 build: $(TARGET)
@@ -23,6 +26,9 @@ clean:
 
 debug:
 	gdb --tui ./$(TARGET)
+
+-include $(DEPS)
+-include $(HEADS)
 
 
 

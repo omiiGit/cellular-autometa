@@ -15,8 +15,12 @@ typedef struct
 
 Window createWindow(const char* title,int width,int height);
 void startWindow(Window* obj);
+void updateBufferSurface(SDL_Surface* surface);
+void updateCurrentSurface(Window* obj);
+void updateWindowSurface(Window* obj);
+void closeWindow(Window* obj);
 
 
 
 
-#endif 
+#endif

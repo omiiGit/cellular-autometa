@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include <stdbool.h> 
 #include "window.h"
 #include "matrix.h"
 #include "Colors.h"
@@ -49,3 +49,45 @@ void startWindow(Window* obj)
     SDL_UpdateWindowSurface(obj->window);
 }
 
+void updateBufferSurface(SDL_Surface* surface)
+{
+    drawGrid(surface);
+}
+
+void updateCurrentSurface(Window* obj)
+{
+    SDL_BlitSurface(obj->buffer_surface,NULL,obj->current_surface,NULL);
+    SDL_UpdateWindowSurface(obj->window);
+}
+
+
+void updateWindowSurface(Window* obj)
+{
+    bool quit = false;
+    SDL_Event event;
+
+    updateBufferSurface(obj->buffer_surface);
+
+    while(!quit)
+    {
+        while(SDL_PollEvent(&event))
+        {
+            if(event.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+        }
+        updateCurrentSurface(obj);
+    }
+
+}
+
+void closeWindow(Window* obj)
+{
+    SDL_FreeSurface(obj->current_surface);
+    SDL_FreeSurface(obj->buffer_surface);
+
+    SDL_DestroyWindow(obj->window);
+
+    SDL_Quit();
+}

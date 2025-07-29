@@ -1,9 +1,18 @@
 #include "matrix.h"
 #include "Colors.h"
+#include "list.h"
 #include "Macro.h"
 
+Vec2 createVec2(int x,int y)
+{
+    return(Vec2)
+    {
+        .x = x,
+        .y = y,
+    };
+}
 
-Matrix creatMatrix(void)
+Matrix createMatrix(void)
 {
     return(Matrix)
     {
@@ -38,5 +47,60 @@ void drawGrid(SDL_Surface* surface)
         SDL_Rect line = (SDL_Rect){.h = SCREEN_HEIGHT,.w = 1,.x = CELL_WIDTH*i,.y = 0};
 
         SDL_FillRect(surface,&line,RED);
+    }
+}
+
+void printMatrix(Matrix* matrix)
+{
+    printf("    ");
+    for(int i = 0;i < COLUMNS;i++)
+    {
+        printf("%d",i);
+    }
+    printf("\n--+-");
+    for(int i = 0;i < COLUMNS;i++)
+    {
+        printf("-");
+    }
+    printf("\n");
+
+    for(int i = 0;i < ROWS;i++)
+    {
+        printf("%d | ",i);
+        for(int j = 0;j < COLUMNS;j++)
+        {
+            printf("%d",matrix->arr[COLUMNS * i + j]);
+        }
+        printf("\n");
+    }
+    
+}
+
+void setCell(Matrix* obj,int x,int y)
+{
+    obj->arr[COLUMNS * y + x] = 1;
+}
+
+void updateCells(Matrix* obj)
+{
+    List vectors = createList();
+
+    for(int i = 0;i < COLUMNS;i++)
+    {
+        for(int j = 0;j < ROWS;j++)
+        {
+            int pos = COLUMNS * i + j;
+            Vec2 temp = (Vec2){.x = i,.y=j};
+
+            if(obj->arr[pos] == 1)
+            {
+                obj->arr[pos] = 1;
+                obj->arr[pos] = 0;
+                obj->arr[COLUMNS * (i+1) + j] = 1;
+
+                Vec2 vec = (Vec2){.x = i+1,.y=j};
+                LIST_ADD(Vec2,&vectors,vec);
+            }
+        }
     }
 }
