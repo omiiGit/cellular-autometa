@@ -27,15 +27,19 @@ int main()
     int y = 1;
     initMatrix(&matrix);
     setCell(&matrix,x,y);
-    setCell(&matrix,0,4);
+    setCell(&matrix,1,0);
+    setCell(&matrix,2,0);
+    setCell(&matrix,3,0);
     setCell(&matrix,0,6);
-    setCell(&matrix,2,4);
+    setCell(&matrix,3,6);
 
-    printMatrix(&matrix);
-    updateCells(&matrix);
-    printf("\n");
-    printMatrix(&matrix);
-
+    for(int i = 0;i < 10;i++)
+    {
+        printMatrix(&matrix);
+        updateCells(&matrix);
+        printf("\n");
+    }
+    
     /*List vecList = createList();
     for(int i = 0;i < 10;i++)
     {

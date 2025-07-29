@@ -37,6 +37,17 @@ Matrix createMatrix(void)
 
 void initMatrix(Matrix* matrix)
 {
+    matrix->surface = SDL_CreateRGBSurface(
+            0,
+            SCREEN_WIDTH,
+            SCREEN_HEIGHT,
+            32,
+            0,
+            0,
+            0,
+            0
+            );
+
     for(int i = 0;i < ROWS;i++)
     {
         for(int j = 0;j < COLUMNS;j++)
@@ -70,10 +81,10 @@ void printMatrix(Matrix* matrix)
     printf("    ");
     for(int i = 0;i < COLUMNS;i++)
     {
-        printf("%d",i);
+        printf("%2d",i);
     }
     printf("\n--+-");
-    for(int i = 0;i < COLUMNS;i++)
+    for(int i = 0;i < COLUMNS*2;i++)
     {
         printf("-");
     }
@@ -84,7 +95,7 @@ void printMatrix(Matrix* matrix)
         printf("%d | ",i);
         for(int j = 0;j < COLUMNS;j++)
         {
-            printf("%d",matrix->arr[COLUMNS * i + j]);
+            printf("%2d",matrix->arr[COLUMNS * i + j]);
         }
         printf("\n");
     }
@@ -93,7 +104,7 @@ void printMatrix(Matrix* matrix)
 
 void setCell(Matrix* obj,int x,int y)
 {
-    obj->arr[COLUMNS * y + x] = 1;
+    obj->arr[COLUMNS * y + x] = DOWN;
 }
 
 void updateCells(Matrix* obj)
@@ -105,17 +116,39 @@ void updateCells(Matrix* obj)
         for(int j = 0;j < COLUMNS;j++)
         {
             Vec2 temp = {i,j};
+
             int pos = COLUMNS * i + j;
-
-            if(obj->arr[pos] == 1 && !isVec2inList(&temp,&vectors))
+            switch(obj->arr[pos])
             {
-                obj->arr[pos] = 0;
-                obj->arr[COLUMNS * (i+1) + j] = 1;
-
-                Vec2 vec = (Vec2){.x = i+1,.y=j};
-                LIST_ADD(Vec2,&vectors,vec);
+                case DOWN:
+                    if(!isVec2inList(&temp,&vectors))
+                    {
+                        if(obj->arr[COLUMNS * (i+1) + j] == COLLIDE || i == ROWS - 1)
+                        {
+                            obj->arr[pos] = COLLIDE;
+                        }
+                        else 
+                        {
+                            obj->arr[pos] = 0;
+                            if(obj->arr[COLUMNS * (i+1) + j] != DOWN)
+                            {
+                                obj->arr[COLUMNS * (i+1) + j] = DOWN;
+                                Vec2 vec = (Vec2){.x = i+1,.y=j};
+                                LIST_ADD(Vec2,&vectors,vec);
+                            }
+                            else
+                            {
+                                obj->arr[COLUMNS * i + j] = DOWN;
+                            }
+                            //Vec2 vec = (Vec2){.x = i+1,.y=j};
+                            //LIST_ADD(Vec2,&vectors,vec);
+                        }
+                    }
+                break;
+                case COLLIDE:
+                    
+                break;
             }
-                
         }
     }
 }

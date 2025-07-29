@@ -6,6 +6,13 @@
 #include "Macro.h"
 #include "list.h"
 
+typedef enum 
+{
+    VOID = 0,
+    DOWN = 1,
+    COLLIDE = -1,
+}State;
+
 typedef struct 
 {
     int x;
