@@ -40,3 +40,8 @@ To github.com:omiiGit/cellular-autometa.git
    68c1f34..8d0d4ab  master -> master
 To github.com:omiiGit/cellular-autometa.git
    cf0686d..7990526  master -> master
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
