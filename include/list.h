@@ -107,11 +107,28 @@ do{\
     (list)->count--;\
 }while(0)\
 
+#define LIST_FLUSH(type,list)\
+do{\
+    int i = (list)->count;\
+\
+    for(int __o = 0;__o < i;__o++)\
+    {\
+        LIST_DEL((type),(list),0);\
+    }\
+}while(0)\
+
 #define PRINT_LIST(type,list)\
 do{\
-    for(int __j = 0;__j < (list)->count;__j++)\
+    if((list)->count) == 0)\
     {\
-        PRINT_##type(LIST_GET(type,(list),__j));\
+        printf("List is empty\n");\
+    }\
+    else\
+    {\
+        for(int __j = 0;__j < (list)->count;__j++)\
+        {\
+            PRINT_##type(LIST_GET(type,(list),__j));\
+        }\
     }\
 }while(0)\
 

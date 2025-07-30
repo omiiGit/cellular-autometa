@@ -9,7 +9,7 @@
 typedef enum 
 {
     VOID = 0,
-    DOWN = 1,
+    SAND = 1,
     COLLIDE = -1,
 }State;
 
@@ -22,7 +22,7 @@ typedef struct
 typedef struct
 {
     int arr[COLUMNS*ROWS];
-    SDL_Surface* surface;
+    //SDL_Surface* surface;
 }Matrix;
 
 Vec2 createVec2(int x,int y);
@@ -33,7 +33,9 @@ Matrix createMatrix(void);
 void initMatrix(Matrix* matrix);
 void drawGrid(SDL_Surface* surface);
 void printMatrix(Matrix* obj);
-void setCell(Matrix* obj,int x,int y);
+void setCell(Matrix* obj,int x,int y,State state);
 void updateCells(Matrix* obj);
+void drawCell(SDL_Surface* surface,int x,int y,Uint32 color);
+void drawMatrix(Matrix* matrix,SDL_Surface* surface);
 
 #endif 

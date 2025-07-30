@@ -8,7 +8,7 @@
 int main()
 {
 
-    /*const char* title = "AUTOMATA";
+    const char* title = "AUTOMATA";
     Window window = createWindow(
             title,
             SCREEN_WIDTH,
@@ -19,10 +19,8 @@ int main()
 
     startWindow(&window);
     updateWindowSurface(&window);
-    closeWindow(&window);*/ 
 
-
-    Matrix matrix = createMatrix();
+    /*Matrix matrix = createMatrix();
     int x = 2;
     int y = 1;
     initMatrix(&matrix);
@@ -38,8 +36,9 @@ int main()
         printMatrix(&matrix);
         updateCells(&matrix);
         printf("\n");
-    }
+    }*/
     
+
     /*List vecList = createList();
     for(int i = 0;i < 10;i++)
     {
@@ -53,7 +52,23 @@ int main()
 
         printf("%d - %d\n",vec.x,vec.y);
     }
-    Vec2 vec = {2,1};
+
+    LIST_FLUSH(Vec2,&vecList);
+
+    for(int i = 0;i < 10;i++)
+    {
+        if(vecList.count != 0)
+        {
+            Vec2 vec = LIST_GET(Vec2,&vecList,i);
+            printf("%d - %d\n",vec.x,vec.y);
+        }
+        else 
+        {
+            printf("List is empty\n");
+        }
+    }*/
+
+    /*Vec2 vec = {2,1};
     if(isVec2inList(&vec,&vecList))
         printf("Vec is present");
     else
