@@ -57,7 +57,7 @@ void updateBufferSurface(Window* obj)
 
     SDL_BlitSurface(opt,NULL,obj->buffer_surface,NULL);
 
-    drawGrid(obj->buffer_surface);
+    drawGrid(obj->buffer_surface,GREY,WHITE);
     drawMatrix(&obj->matrix,obj->buffer_surface);
 
     SDL_FreeSurface(opt);
@@ -74,6 +74,7 @@ void updateCurrentSurface(Window* obj)
 
 void updateWindowSurface(Window* obj)
 {
+    State state = SAND;
     bool quit = false;
     SDL_Event event;
 
@@ -89,7 +90,19 @@ void updateWindowSurface(Window* obj)
             {
                 switch(event.key.keysym.sym)
                 {    
-                    closeWindow(obj);
+                    case SDLK_UP:
+                        state = SAND;
+                        printf("Sand is selected\n");
+                    break;
+                    case SDLK_DOWN:
+                        state = STONE;
+                        printf("Stone is selected\n");
+                    break;
+                    case SDLK_RIGHT:
+                        state = VOID;
+                        printf("Void is selected\n");
+                    break;
+
                 }
             }
             else if(event.type == SDL_MOUSEBUTTONDOWN)
@@ -97,12 +110,12 @@ void updateWindowSurface(Window* obj)
                 int x_pos = event.motion.x / CELL_WIDTH;
                 int y_pos = event.motion.y / CELL_HEIGHT;
 
-                setCell(&obj->matrix,x_pos,y_pos,SAND);
+                setCell(&obj->matrix,x_pos,y_pos,state);
             }
         }
         updateCurrentSurface(obj);
         updateCells(&obj->matrix);
-        SDL_Delay(10);
+        SDL_Delay(20);
     }
 
 }

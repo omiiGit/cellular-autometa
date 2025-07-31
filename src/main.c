@@ -22,6 +22,7 @@ int main()
 
     startWindow(&window);
     updateWindowSurface(&window);
+    closeWindow(&window);
 
     return 0;
 

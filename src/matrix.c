@@ -48,7 +48,7 @@ void initMatrix(Matrix* matrix)
     }
 }
 
-void drawGrid(SDL_Surface* surface)
+void drawGrid(SDL_Surface* surface,Uint32 grid_color,Uint32 background_color)
 {
     SDL_Rect background = (SDL_Rect)
     {
@@ -58,13 +58,13 @@ void drawGrid(SDL_Surface* surface)
         .h = SCREEN_HEIGHT-1,
     };
 
-    SDL_FillRect(surface,&background,WHITE);
+    SDL_FillRect(surface,&background,background_color);
 
     for(int i = 1;i < ROWS ;i++)
     {
         SDL_Rect line = (SDL_Rect){.h = 1,.w = SCREEN_WIDTH,.x = 0,.y = CELL_HEIGHT*i};
 
-        SDL_FillRect(surface,&line,GREY);
+        SDL_FillRect(surface,&line,grid_color);
     }
 
     for(int i = 1;i < COLUMNS ;i++)
@@ -72,7 +72,7 @@ void drawGrid(SDL_Surface* surface)
 
         SDL_Rect line = (SDL_Rect){.h = SCREEN_HEIGHT,.w = 1,.x = CELL_WIDTH*i,.y = 0};
 
-        SDL_FillRect(surface,&line,GREY);
+        SDL_FillRect(surface,&line,grid_color);
     }
 }
 
@@ -105,6 +105,9 @@ void printMatrix(Matrix* matrix)
 void setCell(Matrix* obj,int x,int y,State state)
 {
     obj->arr[COLUMNS * y + x] = state;
+    obj->arr[COLUMNS * (y+1) + x] = state;
+    obj->arr[COLUMNS * y + (x+1)] = state;
+    obj->arr[COLUMNS * (y+1) + (x+1)] = state;
 }
 
 void updateCells(Matrix* obj)
@@ -124,18 +127,8 @@ void updateCells(Matrix* obj)
                     {
                         if(i == ROWS-1)
                         {
-                            CURRENT_CELL = COLLIDE;
+                            CURRENT_CELL = DEAD;
                             continue;
-                        }
-                        if(DOWN_CELL == COLLIDE)
-                        {
-                            //CURRENT_CELL = COLLIDE;
-                            if(DOWN_RIGHT == VOID && DOWN_LEFT == VOID)
-                            {
-                                CURRENT_CELL = VOID;
-
-                                DOWN_RIGHT = SAND;
-                            }
                         }
                         else 
                         {
@@ -143,19 +136,41 @@ void updateCells(Matrix* obj)
                             if(DOWN_CELL == VOID)
                             {
                                 DOWN_CELL = SAND;
-                                Vec2 vec = (Vec2){.x = i+1,.y=j};
-                                LIST_ADD(Vec2,&vectors,vec);
+                                ADD_TO_LIST;
+                            }
+                            else if(DOWN_CELL == DEAD || DOWN_CELL == STONE || DOWN_CELL == SAND)
+                            {
+                                if(DOWN_RIGHT == VOID)
+                                {
+                                    DOWN_RIGHT = SAND;
+                                    Vec2 vec = (Vec2){.x = i+1,.y=j+1};
+                                    LIST_ADD(Vec2,&vectors,vec);
+                                }
+                                else if(DOWN_LEFT == VOID)
+                                {
+                                    DOWN_LEFT = SAND;
+                                    Vec2 vec = (Vec2){.x = i+1,.y=j-1};
+                                    LIST_ADD(Vec2,&vectors,vec);
+                                }
+                                else if(DOWN_CELL == STONE)
+                                {
+                                    CURRENT_CELL = SAND;
+                                    Vec2 vec = (Vec2){.x = i+1,.y=j-1};
+                                    LIST_ADD(Vec2,&vectors,vec);;
+                                }
+                                else 
+                                {
+                                    CURRENT_CELL = DEAD;
+                                }
                             }
                             else
                             {
                                 CURRENT_CELL = SAND;
                             }
-                            //Vec2 vec = (Vec2){.x = i+1,.y=j};
-                            //LIST_ADD(Vec2,&vectors,vec);
                         }
                     }
                 break;
-                case COLLIDE:
+                case DEAD:
                     
                 break;
             }
@@ -170,26 +185,30 @@ void drawCell(SDL_Surface* surface,int x,int y,Uint32 color)
     SDL_Rect cell = (SDL_Rect){
         .x = x * CELL_WIDTH+1,
         .y = y * CELL_HEIGHT+1,
-        .h = CELL_HEIGHT-1,
-        .w = CELL_WIDTH-1,
+        .h = CELL_HEIGHT - 1,
+        .w = CELL_WIDTH - 1,
     };
 
     SDL_FillRect(surface,&cell,color);
 }
 
-void drawMatrix(Matrix* matrix,SDL_Surface* surface)
+void drawMatrix(Matrix* obj,SDL_Surface* surface)
 {
     for(int i = 0;i < ROWS;i++)
     {
         for(int j = 0;j < COLUMNS;j++)
         {
-            if(matrix->arr[COLUMNS * i + j] == SAND)
+            if(CURRENT_CELL == SAND)
             {
                 drawCell(surface,j,i,SANDY);
             }
-            if(matrix->arr[COLUMNS * i + j] == COLLIDE)
+            else if(CURRENT_CELL == DEAD)
             {
                 drawCell(surface,j,i,RED);
+            }
+            else if(CURRENT_CELL == STONE)
+            {
+                drawCell(surface,j,i,BLACK);
             }
         }
     }

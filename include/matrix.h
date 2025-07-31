@@ -10,12 +10,18 @@
 #define DOWN_CELL obj->arr[COLUMNS * (i+1) + j]
 #define DOWN_RIGHT obj->arr[COLUMNS * (i+1) + (j+1)]
 #define DOWN_LEFT obj->arr[COLUMNS * (i+1) + (j-1)]
+#define ADD_TO_LIST \
+do{\
+    Vec2 vec = (Vec2){.x = i+1,.y=j};\
+    LIST_ADD(Vec2,&vectors,vec);\
+}while(0)\
 
 typedef enum 
 {
     VOID = 0,
     SAND = 1,
-    COLLIDE = -1,
+    STONE = 2,
+    DEAD = -1,
 }State;
 
 typedef struct 
@@ -36,11 +42,11 @@ bool isVec2inList(Vec2* a,List* vec_list);
 
 Matrix createMatrix(void);
 void initMatrix(Matrix* matrix);
-void drawGrid(SDL_Surface* surface);
+void drawGrid(SDL_Surface* surface,Uint32 grid_color,Uint32 background_color);
 void printMatrix(Matrix* obj);
 void setCell(Matrix* obj,int x,int y,State state);
 void updateCells(Matrix* obj);
 void drawCell(SDL_Surface* surface,int x,int y,Uint32 color);
-void drawMatrix(Matrix* matrix,SDL_Surface* surface);
+void drawMatrix(Matrix* obj,SDL_Surface* surface);
 
 #endif 
