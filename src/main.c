@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "Macro.h"
+#include "time.h"
 #include "utils.h"
 #include "matrix.h" 
 #include "window.h"
 
 int main()
 {
+    srand(time(NULL));
 
     const char* title = "AUTOMATA";
     Window window = createWindow(
@@ -16,11 +18,16 @@ int main()
             );
 
     GET_WINDOW_DETAILS;
+    foo();
 
     startWindow(&window);
     updateWindowSurface(&window);
 
-    /*Matrix matrix = createMatrix();
+    return 0;
+
+}
+
+/*Matrix matrix = createMatrix();
     int x = 2;
     int y = 1;
     initMatrix(&matrix);
@@ -37,9 +44,8 @@ int main()
         updateCells(&matrix);
         printf("\n");
     }*/
-    
 
-    /*List vecList = createList();
+/*List vecList = createList();
     for(int i = 0;i < 10;i++)
     {
         Vec2 vec = {i,0};
@@ -74,6 +80,3 @@ int main()
     else
         printf("Vec is absent");*/
 
-    
-    return 0;
-}

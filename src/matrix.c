@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include "Colors.h"
 #include "SDL_stdinc.h"
+#include "utils.h"
 #include "list.h"
 #include "Macro.h"
 
@@ -116,28 +117,36 @@ void updateCells(Matrix* obj)
         {
             Vec2 temp = {i,j};
 
-            int pos = COLUMNS * i + j;
-            switch(obj->arr[pos])
+            switch(CURRENT_CELL)
             {
                 case SAND:
                     if(!isVec2inList(&temp,&vectors))
                     {
-                        if(obj->arr[COLUMNS * (i+1) + j] == COLLIDE || i == ROWS - 1)
+                        if(i == ROWS-1)
                         {
-                            obj->arr[pos] = COLLIDE;
+                            CURRENT_CELL = COLLIDE;
+                            continue;
+                        }
+                        if(DOWN_CELL == COLLIDE)
+                        {
+                            //CURRENT_CELL = COLLIDE;
+                            if(DOWN_RIGHT == VOID && DOWN_LEFT == VOID)
+                            {
+                                CURRENT_CELL = 
+                            }
                         }
                         else 
                         {
-                            obj->arr[pos] = 0;
-                            if(obj->arr[COLUMNS * (i+1) + j] != SAND)
+                            CURRENT_CELL = VOID;
+                            if(DOWN_CELL == VOID)
                             {
-                                obj->arr[COLUMNS * (i+1) + j] = SAND;
+                                DOWN_CELL = SAND;
                                 Vec2 vec = (Vec2){.x = i+1,.y=j};
                                 LIST_ADD(Vec2,&vectors,vec);
                             }
                             else
                             {
-                                obj->arr[COLUMNS * i + j] = SAND;
+                                CURRENT_CELL = SAND;
                             }
                             //Vec2 vec = (Vec2){.x = i+1,.y=j};
                             //LIST_ADD(Vec2,&vectors,vec);

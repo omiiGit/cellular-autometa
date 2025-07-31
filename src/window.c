@@ -102,7 +102,7 @@ void updateWindowSurface(Window* obj)
         }
         updateCurrentSurface(obj);
         updateCells(&obj->matrix);
-        SDL_Delay(25);
+        SDL_Delay(10);
     }
 
 }

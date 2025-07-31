@@ -6,6 +6,11 @@
 #include "Macro.h"
 #include "list.h"
 
+#define CURRENT_CELL obj->arr[COLUMNS * i + j]
+#define DOWN_CELL obj->arr[COLUMNS * (i+1) + j]
+#define DOWN_RIGHT obj->arr[COLUMNS * (i+1) + (j+1)]
+#define DOWN_LEFT obj->arr[COLUMNS * (i+1) + (j-1)]
+
 typedef enum 
 {
     VOID = 0,
