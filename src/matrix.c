@@ -132,7 +132,9 @@ void updateCells(Matrix* obj)
                             //CURRENT_CELL = COLLIDE;
                             if(DOWN_RIGHT == VOID && DOWN_LEFT == VOID)
                             {
-                                CURRENT_CELL = 
+                                CURRENT_CELL = VOID;
+
+                                DOWN_RIGHT = SAND;
                             }
                         }
                         else 
