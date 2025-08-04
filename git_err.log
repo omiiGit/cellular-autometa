@@ -49,3 +49,11 @@ To github.com:omiiGit/cellular-autometa.git
    ec3ce56..b0a7e5c  master -> master
 To github.com:omiiGit/cellular-autometa.git
    3cf289d..2159866  master -> master
+To github.com:omiiGit/cellular-autometa.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'github.com:omiiGit/cellular-autometa.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
