@@ -74,9 +74,13 @@ void updateCurrentSurface(Window* obj)
 
 void updateWindowSurface(Window* obj)
 {
-    State state = SAND_S;
+    State state = SAND;
     bool quit = false;
     SDL_Event event;
+
+    bool isMouseClicked = false;
+    int mouseX,mouseY;
+    Uint32 buttonType;
 
     while(!quit)
     {
@@ -107,12 +111,20 @@ void updateWindowSurface(Window* obj)
             }
             else if(event.type == SDL_MOUSEBUTTONDOWN)
             {
-                int x_pos = event.motion.x / CELL_WIDTH;
-                int y_pos = event.motion.y / CELL_HEIGHT;
-
-                setCell(&obj->matrix,x_pos,y_pos,state);
+                isMouseClicked = true;
+            }
+            else if(event.type == SDL_MOUSEBUTTONUP)
+            {
+                isMouseClicked = false;
             }
         }
+        
+        if(isMouseClicked)
+        {
+            SDL_GetMouseState(&mouseX,&mouseY);
+            setCell(&obj->matrix,mouseX/CELL_WIDTH,mouseY/CELL_HEIGHT,state);
+        }
+
         updateCurrentSurface(obj);
         updateCells(&obj->matrix);
         SDL_Delay(20);
