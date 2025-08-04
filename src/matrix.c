@@ -138,7 +138,7 @@ void updateCells(Matrix* obj)
                                 DOWN_CELL = SAND;
                                 ADD_TO_LIST;
                             }
-                            else if(DOWN_CELL == DEAD || DOWN_CELL == STONE || DOWN_CELL == SAND)
+                            else if(DOWN_CELL == DEAD || DOWN_CELL == STONE)
                             {
                                 if(DOWN_RIGHT == VOID)
                                 {
@@ -170,6 +170,15 @@ void updateCells(Matrix* obj)
                         }
                     }
                 break;
+                case SAND_S:
+                    if(!isVec2inList(&temp,&vectors))
+                    {
+                        if(DOWN_CELL == SAND_S)
+                        {
+
+                        }
+                    }
+                break;
                 case DEAD:
                     
                 break;
@@ -198,9 +207,9 @@ void drawMatrix(Matrix* obj,SDL_Surface* surface)
     {
         for(int j = 0;j < COLUMNS;j++)
         {
-            if(CURRENT_CELL == SAND)
+            if(CURRENT_CELL == SAND || CURRENT_CELL == SAND_S)
             {
-                drawCell(surface,j,i,SANDY);
+                drawCell(surface,j,i,RED);
             }
             else if(CURRENT_CELL == DEAD)
             {

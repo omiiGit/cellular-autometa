@@ -74,7 +74,7 @@ void updateCurrentSurface(Window* obj)
 
 void updateWindowSurface(Window* obj)
 {
-    State state = SAND;
+    State state = SAND_S;
     bool quit = false;
     SDL_Event event;
 

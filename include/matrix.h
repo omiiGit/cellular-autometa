@@ -20,6 +20,7 @@ typedef enum
 {
     VOID = 0,
     SAND = 1,
+    SAND_S = 3,
     STONE = 2,
     DEAD = -1,
 }State;
