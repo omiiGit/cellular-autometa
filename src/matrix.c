@@ -127,7 +127,7 @@ void updateCells(Matrix* obj)
                     {
                         if(i == ROWS-1)
                         {
-                            CURRENT_CELL = DEAD;
+                            CURRENT_CELL = SAND;
                             continue;
                         }
                         else 
@@ -158,12 +158,8 @@ void updateCells(Matrix* obj)
                                 }
                                 else 
                                 {
-                                    CURRENT_CELL = DEAD;
+                                    CURRENT_CELL = SAND;
                                 }
-                            }
-                            else
-                            {
-                                CURRENT_CELL = SAND;
                             }
                         }
                     }
@@ -237,7 +233,7 @@ void drawMatrix(Matrix* obj,SDL_Surface* surface)
         {
             if(CURRENT_CELL == SAND)
             {
-                drawCell(surface,j,i,RED);
+                drawCell(surface,j,i,SANDY);
             }
             else if(CURRENT_CELL == SAND_S)  
             {

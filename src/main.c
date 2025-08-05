@@ -18,7 +18,6 @@ int main()
             );
 
     GET_WINDOW_DETAILS;
-    foo();
 
     startWindow(&window);
     updateWindowSurface(&window);
