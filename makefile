@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall -Iinclude `sdl2-config --cflags`
-CLIBS = `sdl2-config --libs`
+CLIBS = `sdl2-config --libs` -lSDL2_ttf
 
 SRC = $(wildcard src/*.c)
 HEAD = $(wildcard include/*.h)
@@ -19,6 +19,7 @@ build/%.o: src/%.c $(HEAD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run:
+	i3-msg workspace 2
 	./$(TARGET)
 
 clean:

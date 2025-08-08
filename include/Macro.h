@@ -1,6 +1,8 @@
 #ifndef MACRO_H
 #define MACRO_H
 
+#define GRID 0
+
 #define SCREEN_WIDTH 600
 #define SCREEN_HEIGHT 400
 

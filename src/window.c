@@ -15,12 +15,18 @@ Window createWindow(const char* title,int width,int height)
         .title = title,
         .width = width,
         .height = height,
+        .state = SAND,
     };
 }
 
 void startWindow(Window* obj)
 {
     SDL_Init(SDL_INIT_VIDEO);
+    
+    if(TTF_Init() < 0)
+    {
+        printf("\nFailed to init TTF\n");
+    }
 
     obj->window = SDL_CreateWindow(
             obj->title,
@@ -45,6 +51,8 @@ void startWindow(Window* obj)
             );
     
     initMatrix(&obj->matrix);
+    obj->typeState = createText("res/acer.ttf",14,255,0,0);
+    obj->wTitle = createText("res/acer.ttf",20,0,0,255);
 
     SDL_FillRect(obj->current_surface,NULL,BLACK);
 
@@ -58,9 +66,25 @@ void updateBufferSurface(Window* obj)
     SDL_BlitSurface(opt,NULL,obj->buffer_surface,NULL);
 
     drawGrid(obj->buffer_surface,GREY,WHITE);
-    drawMatrix(&obj->matrix,obj->buffer_surface);
+    drawMatrix(&obj->matrix,obj->buffer_surface); 
+    switch(obj->state)
+    {
+        case SAND:
+            initText(&obj->typeState,obj->buffer_surface,"SAND",20,20);
+        break;
+        case STONE:
+            initText(&obj->typeState,obj->buffer_surface,"STONE",20,20);
+        break;
+        case VOID:
+            initText(&obj->typeState,obj->buffer_surface,"VOID",20,20);
+        break;
+        case SAND_S: break;
+    }
+    initText(&obj->wTitle,obj->buffer_surface,"SAND AUTOMATA",180,20);
 
     SDL_FreeSurface(opt);
+    SDL_FreeSurface(obj->typeState.fontSurface);
+    SDL_FreeSurface(obj->wTitle.fontSurface);
 }
 
 void updateCurrentSurface(Window* obj)
@@ -74,7 +98,6 @@ void updateCurrentSurface(Window* obj)
 
 void updateWindowSurface(Window* obj)
 {
-    State state = SAND;
     bool quit = false;
     SDL_Event event;
 
@@ -95,15 +118,15 @@ void updateWindowSurface(Window* obj)
                 switch(event.key.keysym.sym)
                 {    
                     case SDLK_UP:
-                        state = SAND;
+                        obj->state = SAND;
                         printf("Sand is selected\n");
                     break;
                     case SDLK_DOWN:
-                        state = STONE;
+                        obj->state = STONE;
                         printf("Stone is selected\n");
                     break;
                     case SDLK_RIGHT:
-                        state = VOID;
+                        obj->state = VOID;
                         printf("Void is selected\n");
                     break;
 
@@ -119,10 +142,11 @@ void updateWindowSurface(Window* obj)
             }
         }
         
+
         if(isMouseClicked)
         {
             SDL_GetMouseState(&mouseX,&mouseY);
-            setCell(&obj->matrix,mouseX/CELL_WIDTH,mouseY/CELL_HEIGHT,state);
+            setCell(&obj->matrix,mouseX/CELL_WIDTH,mouseY/CELL_HEIGHT,obj->state);
         }
 
         updateCurrentSurface(obj);

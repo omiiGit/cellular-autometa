@@ -60,7 +60,8 @@ void drawGrid(SDL_Surface* surface,Uint32 grid_color,Uint32 background_color)
 
     SDL_FillRect(surface,&background,background_color);
 
-    /*for(int i = 1;i < ROWS ;i++)
+#if GRID == 1
+    for(int i = 1;i < ROWS ;i++)
     {
         SDL_Rect line = (SDL_Rect){.h = 1,.w = SCREEN_WIDTH,.x = 0,.y = CELL_HEIGHT*i};
 
@@ -73,7 +74,8 @@ void drawGrid(SDL_Surface* surface,Uint32 grid_color,Uint32 background_color)
         SDL_Rect line = (SDL_Rect){.h = SCREEN_HEIGHT,.w = 1,.x = CELL_WIDTH*i,.y = 0};
 
         SDL_FillRect(surface,&line,grid_color);
-    }*/
+    }
+#endif
 }
 
 void printMatrix(Matrix* matrix)

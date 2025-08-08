@@ -1,7 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <SDL2/SDL.h>  
+#include <SDL2/SDL.h>
+#include "font.h"
 #include <matrix.h>
 
 typedef struct 
@@ -13,6 +14,10 @@ typedef struct
     SDL_Surface* current_surface;
     SDL_Surface* buffer_surface;
     Matrix matrix;
+
+    State state;
+    Text typeState;
+    Text wTitle;
 }Window;
 
 Window createWindow(const char* title,int width,int height);
