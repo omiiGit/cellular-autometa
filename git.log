@@ -69,3 +69,13 @@
  2 files changed, 11 insertions(+)
 [master 885d2f4] updated on Tue Aug  5 09:44:23 PM IST 2025
  11 files changed, 7 insertions(+), 12 deletions(-)
+[master 4d38e29] updated on Fri Aug  8 10:25:26 PM IST 2025
+ 20 files changed, 89 insertions(+), 10 deletions(-)
+ create mode 100644 .cache/clangd/index/font.h.984EC2BC34A4078B.idx
+ create mode 100644 build/font.o
+ create mode 100644 include/font.h
+ create mode 100644 res/acer.ttf
+ create mode 100644 res/ubuntu.ttf
+ create mode 100644 res/vga.ttf
+ create mode 100644 src/font.c
+ create mode 100644 src/vga.ttf
