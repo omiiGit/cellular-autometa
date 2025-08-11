@@ -11,7 +11,9 @@ typedef struct
     int width;
     int height;
     SDL_Window* window;
-    SDL_Surface* current_surface;
+    //SDL_Surface* current_surface;
+    SDL_Texture* current_texture;
+    SDL_Renderer* window_renderer;
     SDL_Surface* buffer_surface;
     Matrix matrix;
 

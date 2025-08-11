@@ -19,7 +19,7 @@ build/%.o: src/%.c $(HEAD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run:
-	i3-msg workspace 2
+	i3-msg workspace 5
 	./$(TARGET)
 
 clean:

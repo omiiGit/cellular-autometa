@@ -10,8 +10,10 @@ Window createWindow(const char* title,int width,int height)
     return(Window)
     {
         .window = NULL,
-        .current_surface = NULL,
+        //.current_surface = NULL,
         .buffer_surface = NULL,
+        .window_renderer = NULL,
+        .current_texture = NULL,
         .title = title,
         .width = width,
         .height = height,
@@ -37,7 +39,9 @@ void startWindow(Window* obj)
             SDL_WINDOW_SHOWN
             );
 
-    obj->current_surface = SDL_GetWindowSurface(obj->window);
+    //obj->current_surface = SDL_GetWindowSurface(obj->window);
+    obj->window_renderer = SDL_CreateRenderer(obj->window,-1,SDL_RENDERER_ACCELERATED);
+    SDL_SetRenderDrawColor(obj->window_renderer,255,255,255,0);
      
     obj->buffer_surface = SDL_CreateRGBSurface(
             0,
@@ -54,19 +58,18 @@ void startWindow(Window* obj)
     obj->typeState = createText("res/acer.ttf",14,255,0,0);
     obj->wTitle = createText("res/acer.ttf",20,0,0,255);
 
-    SDL_FillRect(obj->current_surface,NULL,BLACK);
+    //SDL_FillRect(obj->current_surface,NULL,BLACK);
 
     SDL_UpdateWindowSurface(obj->window);
 }
 
 void updateBufferSurface(Window* obj)
 {
-    SDL_Surface* opt = SDL_ConvertSurface(obj->buffer_surface,obj->current_surface->format,0);
-
-    SDL_BlitSurface(opt,NULL,obj->buffer_surface,NULL);
 
     drawGrid(obj->buffer_surface,GREY,WHITE);
     drawMatrix(&obj->matrix,obj->buffer_surface); 
+
+
     switch(obj->state)
     {
         case SAND:
@@ -82,17 +85,31 @@ void updateBufferSurface(Window* obj)
     }
     initText(&obj->wTitle,obj->buffer_surface,"SAND AUTOMATA",180,20);
 
-    SDL_FreeSurface(opt);
+    //SDL_Surface* opt = SDL_ConvertSurface(obj->buffer_surface,obj->current_surface->format,0);
+
+    //SDL_FreeSurface(obj->buffer_surface);
     SDL_FreeSurface(obj->typeState.fontSurface);
     SDL_FreeSurface(obj->wTitle.fontSurface);
+
+    //return opt;
 }
 
 void updateCurrentSurface(Window* obj)
 {
-    updateBufferSurface(obj);
+    //obj->buffer_surface = updateBufferSurface(obj);
 
-    SDL_BlitSurface(obj->buffer_surface,NULL,obj->current_surface,NULL);
-    SDL_UpdateWindowSurface(obj->window);
+    //SDL_BlitSurface(obj->buffer_surface,NULL,obj->current_surface,NULL);
+    //SDL_UpdateWindowSurface(obj->window);
+
+    updateBufferSurface(obj);
+    obj->current_texture = SDL_CreateTextureFromSurface(obj->window_renderer,obj->buffer_surface);
+
+    //SDL_RenderClear(obj->window_renderer);
+    SDL_RenderCopy(obj->window_renderer,obj->current_texture,NULL,NULL);
+    SDL_RenderPresent(obj->window_renderer);
+
+    SDL_DestroyTexture(obj->current_texture);
+
 }
 
 
@@ -158,8 +175,10 @@ void updateWindowSurface(Window* obj)
 
 void closeWindow(Window* obj)
 {
-    SDL_FreeSurface(obj->current_surface);
+    //SDL_FreeSurface(obj->current_surface);
     SDL_FreeSurface(obj->buffer_surface);
+    SDL_DestroyRenderer(obj->window_renderer);
+    SDL_DestroyTexture(obj->current_texture);
 
     SDL_DestroyWindow(obj->window);
 
